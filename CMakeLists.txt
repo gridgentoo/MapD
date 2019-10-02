@@ -852,9 +852,10 @@ include(CPack)
 
 add_custom_target(sphinx
   COMMAND python3 -m venv sphinx-env
-  COMMAND . sphinx-env/bin/activate
-  COMMAND pip install -r requirements.txt
+  COMMAND . sphinx-env/bin/activate && pip install -r requirements.txt
   COMMAND rm -rf build
-  COMMAND make html
+  COMMAND . sphinx-env/bin/activate && make html
   WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}/docs
   )
+
+add_dependencies(sphinx doxygen)
